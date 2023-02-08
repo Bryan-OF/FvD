@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 32 32">
+	<style type="text/css">
+		.ruit{fill:#458EF7;}
+		.outer{fill:#FFFFFF;}
+		.inner{fill:#333333;}
+	</style>
+	<rect class="ruit" x="4.7" y="4.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -6.6274 16)"  width="22.6" height="22.6"/>
+	<circle class="outer" cx="16" cy="16" r="6.4"/>
+	<circle class="inner" cx="16" cy="16" r="3.2"/>
+</svg>

@@ -1,0 +1,57 @@
+/* CSS Document */
+
+/*********/
+/* FONTS */
+/*********/
+@font-face {
+	font-family: 'eenfont';
+	src: url('../fonts/eenfont.woff2') format('woff2'),
+			 url('../fonts/eenfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+
+}
+
+
+
+
+
+/**************/
+/* CSS REMEDY */
+/**************/
+*, *::after, *::before {
+  box-sizing:border-box;  
+}
+
+button:not[disabled], summary {
+	cursor: pointer;
+}
+
+
+
+
+
+/*********************/
+/* CUSTOM PROPERTIES */
+/*********************/
+:root {
+	/* startje */
+	--color-text:#111;
+	--color-background:#eee;
+}
+
+
+
+
+
+/****************/
+/* JOUW STYLING */
+/****************/
+body {
+  font-family:eenfont, sans-serif;
+  color:var(--color-text);
+  background-color:var(--color-background);
+}
+
+/* jouw code */
+
