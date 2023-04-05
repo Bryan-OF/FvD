@@ -3,14 +3,21 @@
 /*********/
 /* FONTS */
 /*********/
+
+
 @font-face {
 	font-family: 'eenfont';
 	src: url('../fonts/eenfont.woff2') format('woff2'),
 			 url('../fonts/eenfont.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
-
 }
+
+/* @font-face {
+	font-family: ;
+	src: url('../fonts/') format (''),
+	     url('../fonts/') format('');
+} */
 
 
 
@@ -38,6 +45,11 @@ button:not[disabled], summary {
 	/* startje */
 	--color-text:#111;
 	--color-background:#eee;
+	--color-div-bg-boven:#5ba7fc;
+
+	/* fonts */
+
+	--font-Be-modern: "Helvetica Bold", "Helvetica", "Arial", sans-serif;
 }
 
 
@@ -47,11 +59,86 @@ button:not[disabled], summary {
 /****************/
 /* JOUW STYLING */
 /****************/
+
 body {
-  font-family:eenfont, sans-serif;
-  color:var(--color-text);
-  background-color:var(--color-background);
+	font-family: eenfont, sans-serif;
+	color: var(--color-text);
+	background-color: var(--color-background);
+
+	height: 100dvh;
+	display: grid;
+	place-content: center;
+}
+  
+div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 0;
+	height: 0;
+	border: 9.375em solid transparent;
+	animation: logo-background 2s forwards;
+}
+  
+div::before {
+	content: "";
+	position: absolute;
+	top: -9.875em;
+	left: -9.875em;
+	width: 0;
+	height: 0;
+	border: 9.875em solid transparent;
+	border-bottom-color: var(--color-div-bg-boven);
+	animation: logo-background-before 1s forwards;
+}
+  
+h1 {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+
+	font-size: 10em;
+	font-family: var(--font-Be-modern);
+
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	animation: be-anim 1s 1.5s forwards;
+}
+  
+@keyframes logo-background {
+	0% {
+	  width: 0;
+	  height: 0;
+	  border: 9.375em solid transparent;
+	}
+	100% {
+	  width: 18.75em;
+	  height: 18.75em;
+	  border: 9.375em solid var(--color-div-bg-boven);
+	}
+}
+  
+@keyframes logo-background-before {
+	0% {
+	  width: 0;
+	  height: 0;
+	  border: 9.375em solid transparent;
+	}
+	100% {
+	  width: 19.75em;
+	  height: 19.75em;
+	  border: 9.875em solid transparent;
+	}
+}
+  
+@keyframes be-anim {
+	0% {
+	  opacity: 0;
+	}
+	100% {
+	  opacity: 1;
+	}
 }
 
 /* jouw code */
-
