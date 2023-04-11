@@ -27,7 +27,7 @@
 
 
 
-button:not[disabled], summary {
+button:not([disabled]), summary {
 	cursor: pointer;
 }
 
@@ -64,34 +64,14 @@ html, body {
 
 
 
-/****************/
-/* JOUW STYLING */
-/****************/
+/*******************/
+/* GENERAL STYLING */
+/*******************/
 body {
 	font-family: eenfont, sans-serif;
 	color: var(--color-text);
 	background-color: var(--color-background);
 }
-
-
-@media (min-width: 769px) {
-	
-}
-
-
-/************/
-/* DE TITEL */
-/************/
-header {
-  grid-area: Title;
-
-	background-color: var(--color-background-header);
-	padding: .52em 0;
-	height: 3.56875em;
-}
-
-
-
 
 h1, h2 {
 	color: var(--color-text-header);
@@ -99,25 +79,163 @@ h1, h2 {
 }
 
 
-h2 {
-	background-color: var(--color-background);
-	padding: 0.7em;
-	position: sticky;
-  top: 0;
-  z-index: 100;
-}
 
+/*************/
+/* DE LAYOUT */
+/*************/
+
+/* body */
+header {
+  height:8vh;
+}
 
 main {
-  display: grid; 
-  grid-auto-columns: 1fr; 
-  grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr 30em;
-  gap: 0em 1em;
+  height:92vh;
+}
+
+
+/* main */
+main {
+  display:grid;
+  grid-template-rows: 20% 80%;
   grid-template-areas:
-    "Title Title"
-    "Section-1 Section-2"
-    "Section-1 Section-3";
+    "bender"
+    "jokes";
+}
+
+/* jokes list and liked list */
+section:nth-of-type(1),
+section:nth-of-type(3) {
+  grid-area:jokes;
+}
+
+/* bender */
+section:nth-of-type(2) {
+  grid-area:bender;
+}
+
+@media (min-width:40em) and (min-height: 40em) {
+  main {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50% 50%;
+    gap: 0em 1em;
+    grid-template-areas:
+      "jokes bender"
+      "jokes liked";
+  }
+
+  /* liked list */
+  section:nth-of-type(3) {
+    grid-area:liked;
+  }
+}
+
+
+
+
+
+/**********/
+/* HEADER */
+/**********/
+header {
+	background-color: var(--color-background-header);
+  display: grid;
+  place-content: center;
+}
+
+
+
+
+
+/**************/
+/* DE LIJSTEN */
+/**************/
+
+/* both lists */
+.list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  margin-top:4rem;
+} 
+
+/* jokes list */
+section:nth-of-type(1) {
+  background-color: purple;
+}
+
+/* liked list */
+section:nth-of-type(3) {
+  background-color: var(--color-background-section-3);
+}
+
+section.active {
+  z-index:100;
+}
+
+
+/* LIST TITLE */
+h2 {
+  position: absolute;
+  bottom:100%;
+  width:50%;
+  height:4rem;
+  flex-shrink: 0;
+  
+  display: grid;
+  place-content: center;
+
+  background-color: var(--color-background);
+	font-size: 1.5em;
+}
+
+section:nth-of-type(1) h2 {
+  left:0;
+}
+
+section:nth-of-type(3) h2 {
+  right:0;
+}
+
+section:not(.active) h2 {
+  font-weight: normal;
+  font-size:1.25em;
+}
+
+/* om van tab te kunnen wisselen */
+h2 button {
+  position:absolute;
+  inset:0;
+
+  appearance: none;
+  color:transparent;
+  background: none;
+  border:none;
+
+  user-select: none;;
+}
+
+@media (min-width:40em) and (min-height: 40em) {
+  .list {
+    margin-top:0;
+  }
+
+  h2 {
+    position: static;
+    width:unset;
+  }
+
+  section:not(.active) h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  /* niet nodig op groot scherm */
+  h2 button {
+    display:none;
+  }
 }
 
 
@@ -125,52 +243,49 @@ main {
 
 
 
-/************/
-/* DE LIJST */
-/************/
-section:nth-of-type(1) {
-  background-color: purple;
 
-  grid-area: Section-1;
-  overflow: hidden auto;
-
-  height: calc(100vh - 3.56875em);
-  max-height: calc(100vh - 3.56875em);
+/* ***** */
+/* JOKES */
+/* ***** */
+section ul {
+  flex-grow:1;
+  padding: 1em;
+  list-style: none;
 
   display: flex;
+  gap: 1em;
+  justify-items: left;
+  align-items: start;
+  overflow-y: scroll;
+}
+
+section:nth-of-type(1) ul {
+  flex-direction: column-reverse;
+}
+
+section:nth-of-type(3) ul {
   flex-direction: column;
 }
 
 
-ul {
-  padding: 1em;
-  list-style: none;
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 1em;
-  justify-items: left;
-  align-items: start;
-  grid-auto-flow: row dense;
-  max-height: 100vh;
 
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-
-
-/**************/
-/* EEN AMIIBO */
-/**************/
+/**********/
+/* A JOKE */
+/**********/
 section li {
+  width:100%;
   padding: 2em;
+  
+  /* display: grid; */
+  /* place-content: center; */
+  /* place-items: center; */
+
   text-align: left;
-  border-radius: 1em;
-  display: grid;
-  place-content: center;
-  place-items: center;
+
   background-color: var(--color-card-background);
+  border-radius: 1em;
 	opacity: 0;
+
 	transform: translateY(50px);
 	animation: fadeInUp 0.5s forwards;
 }
@@ -184,63 +299,60 @@ section li {
 
 section:nth-of-type(1) p {
   font-size: 2em;
-  display: inline-block; 
 }
 
 
 
 
 
-/**********/
-/* BUTTON */
-/**********/
+/*******************/
+/* BUTTON  WRAPPER */
+/*******************/
 section:nth-of-type(1) div {
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
   padding: 1em;
   background-color: grey;
 }
 
 
 
-button {
-  padding: 1em 15em;
-	border-radius: 1em;
+/**********/
+/* BUTTONS */
+/**********/
+section div button,
+section li button {
+  width:100%;
+  padding: 1em;
+
+	font: inherit;
+  font-weight: 700;
+  color: var(--color-button-text);
+
   appearance: none;
   background-color: var(--color-button-background);
   border: .5em solid transparent;
-  
-  font: inherit;
-  font-weight: 700;
-  color: var(--color-button-text);
-  
-  cursor: pointer;
+  border-radius: 1em;
+
+  display:grid;
+  grid-template-columns: min-content;
+  justify-content: center;
 }
-
-
-
-
 
 /* altijd belangrijk */
 /* feedback dat op de button geklikt is */
-button:active {
+section:nth-of-type(1) div button:active {
 	background-color: var(--color-button-active);
 }
 
-
-
-button:hover {
+section:nth-of-type(1) div button:hover {
 	border: .5em solid black;
 }
 
 
 
 
-/* *********** */
-/* BENDER HEAD */
-/* *********** */
+/* ****** */
+/* BENDER */
+/* ****** */
 section:nth-of-type(2) {
 	background: linear-gradient(
     180deg,
@@ -249,39 +361,29 @@ section:nth-of-type(2) {
     rgba(0, 0, 0, 1) 100%
   );
 
-	grid-area: Section-2;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 
-
+/* head */
 section:nth-of-type(2) img {
-  max-width: 75%;
-  height: auto;
-  z-index: 100;
-  animation: wobble 1s infinite;
+  height: 75%;
+  width:auto;
+  display:block;
+
+  animation: wobble .5s infinite alternate ease-in-out;
 }
-
-
-
 
 @keyframes wobble {
   0% {
     transform: rotate(-5deg);
   }
-  50% {
+  100% {
     transform: rotate(5deg);
   }
-  100% {
-    transform: rotate(-5deg);
-  }
 }
-
-
-
 
 /* section:nth-of-type(2) div:nth-of-type(1) {
   z-index: 50;
@@ -327,42 +429,3 @@ section:nth-of-type(2) div:nth-of-type(2) {
 	height: 7.5em;
 	background-color: yellow;
 } */
-
-
-
-
-
-/* *********** */
-/* SAVED JOKES */
-/* *********** */
-section:nth-of-type(3) {
-  background-color: var(--color-background-section-3);
-  grid-area: Section-3;
-  overflow: hidden auto;
-}
-
-
-@media (min-width: 481px) and (max-width: 768px) {
-	main {
-		display: grid; 
-		grid-template-columns: 1fr 1fr; 
-		grid-template-rows: max-content 1fr 25em; 
-		gap: 0px 0px; 
-		grid-template-areas: 
-			"header header"
-			"Section-2 Section-2"
-			"Section-1 Section-1";
-	}
-
-	header {
-		grid-area: header;
-	}
-
-	section:nth-of-type(2) {
-		grid-area: Section-2;
-	}
-
-	section:nth-of-type(1) {
-		grid-area: Section-1;
-	}
-}

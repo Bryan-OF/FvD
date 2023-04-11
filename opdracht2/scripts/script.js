@@ -1,25 +1,29 @@
 // script.js
 
-// JavaScript Document
-console.log("howdy");
-
-// api documentation: 'https://www.amiiboapi.com/'
 const baseURL = "https://v2.jokeapi.dev/joke/";
 const endPoint = "Any?type=single";
 
 // combinatie van baseURL en endPoint
 const URL = baseURL + endPoint;
 
-// verder in de getAmiibo function
+// de joke-ljst
+const jokeList = document.querySelector('section:nth-of-type(1) ul');
+// de get-joke-button
+const getJokeButton = document.querySelector('div button');
+// de like-list
+const likeList = document.querySelector('section:nth-of-type(3) ul');
 
-// de lijst
-const list = document.querySelector('ul');
-// de button
-const button = document.querySelector('button');
 
-/****************/
-/* VUL DE LIJST */
-/****************/
+// tab-buttons
+const jokeTab = document.querySelector('section:nth-of-type(1) h2 button');
+const likeTab = document.querySelector('section:nth-of-type(3) h2 button');
+
+
+
+/////////////
+// GET A JOKE
+/////////////
+
 function getJoke() {
   getData(URL).then(data => {
     const theJoke = data.joke;
@@ -29,23 +33,22 @@ function getJoke() {
         <button class="like-button">Like</button>
       </li>
     `;
-    list.insertAdjacentHTML('afterbegin', theJokeHTML);
+    jokeList.insertAdjacentHTML('afterbegin', theJokeHTML);
 
     // Select the like button inside the newly added li element
     const likeButton = document.querySelector('li button.like-button');
     likeButton.addEventListener('click', () => {
       // Move the li element to the dropArea
-      const dropArea = document.querySelector('section:nth-of-type(3) > ul');
+      
       const listItem = likeButton.closest('li');
-      dropArea.prepend(listItem);
+      likeList.prepend(listItem);
     });
   });
 }
 
-/****************/
+
 /* FETCH DATA   */
 /* RETURNS JSON */
-/****************/
 async function getData(URL) {
   return (
     fetch(URL)
@@ -58,12 +61,47 @@ async function getData(URL) {
   );
 }
 
-/*********/
-/* START */
-/*********/
-button.addEventListener("click", getJoke);
 
+/* START */
+getJokeButton.addEventListener("click", getJoke);
+
+
+
+
+
+//////////////
+// SWITCH TABS
+//////////////
+
+function switchTab(event) {
+  const geklikteButton = event.currentTarget;
+  const bijbehorendeSection = geklikteButton.closest("section");
+
+  // als die section de class active heeft dan hoeft er niets te gebeuren
+  if (bijbehorendeSection.classList.contains("active")) {
+    // do nothing
+  }
+  // anders de tabs wisselen
+  else {
+    const deActieveSection = document.querySelector(".list.active");
+
+    bijbehorendeSection.classList.add("active");
+    deActieveSection.classList.remove("active");
+  }
+}
+
+jokeTab.addEventListener("click", switchTab);
+likeTab.addEventListener("click", switchTab);
+
+
+
+
+
+
+////////////////////////
 // Drag and drop funtion
+////////////////////////
+
 // used http://sortablejs.github.io/Sortable/#simple-list for help
 // Target the 'ul' inside the first and third sections
 const jokesList = document.querySelector("section:nth-of-type(1) > ul");
@@ -79,9 +117,7 @@ Sortable.create(jokesList, {
   },
 });
 
-Sortable.create(dropArea, {
+Sortable.create(likeList, {
   group: "shared",
   animation: 150,
 });
-
-

@@ -1,5 +1,3 @@
-/* CSS Document */
-
 /*********/
 /* FONTS */
 /*********/
@@ -19,13 +17,13 @@
 	font-style: normal;
 }
 
-@font-face {
+/* @font-face {
 	font-family: 'archivo-semibold';
 	src: url('../fonts/archivo-semibold-webfont.woff2') format('woff2'),
 	     url('../fonts/archivo-semibold-webfont.woff') format('woff');
 	font-weight: 400;
 	font-style: normal;
-}
+} */
 
 /* @font-face {
 	font-family: ;
@@ -39,7 +37,9 @@
 /* CSS REMEDY */
 /**************/
 *, *::after, *::before {
-  box-sizing:border-box;  
+  box-sizing:border-box;
+	padding: 0;
+	margin: 0;
 }
 
 button:not[disabled], summary {
@@ -55,7 +55,8 @@ button:not[disabled], summary {
 /*********************/
 :root {
 	/* fonts */
-	--font-Be-first: "Helvetica Bold", "Helvetica", "Arial", sans-serif;
+	--font-Be-first: "Inter", "Helvetica", "Arial", "sans-serif";
+	--font-Be-second: "adobecleanbold", "Arial", "Helvetica", "sans-serif";
 
 	/* Logo kleuren */
 	--color-bg-body: #eee;
@@ -72,12 +73,12 @@ button:not[disabled], summary {
 	--color-text-1: var(--color-huisstyle-black);
 
 	/* Behance second version of the logo */
-	--color-div-bg-2: var(--color-huisstyle-verydarkBlue);
-	--bg-div-border-2: var(--color-huisstyle-lightBlue);
+	--bg-div-2: var(--color-huisstyle-verydarkBlue);
+	--bg-div-border: var(--color-huisstyle-lightBlue);
 	--color-text-2: var(--color-huisstyle-lightBlue);
 
 	/* Behance third version of the logo */
-	--color-div-bg-3: var(--color-huisstyle-black);
+	--bg-div-3: var(--color-huisstyle-black);
 	--color-text-3-8: var(--color-huisstyle-white);
 
 	/* Behance fourth version of the logo */
@@ -85,11 +86,14 @@ button:not[disabled], summary {
 	/* Behance fifth version of the logo */
 
 	/* Behance sixth version of the logo */
-	--color-div-bg-6: var(--color-huisstyle-lightBlue);
+	--bg-div-6: var(--color-huisstyle-lightBlue);
 
 	/* Behance seventh version of the logo */
 
 	/* Behance eigth version of the logo */
+
+	/* Animation speed */
+	--animation-speed: 5s;
 }
 
 
@@ -99,68 +103,32 @@ button:not[disabled], summary {
 /****************/
 /* JOUW STYLING */
 /****************/
-
 body {
 	background-color: var(--color-bg-body);
-
 	height: 100dvh;
-	display: grid;
-	place-content: center;
 }
 
-/* border */
+
+
+
+/* ************** */
+/* The background */
+/* ************** */
 div {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%); 
-	width: 0;
-	height: 0;
-	animation: logo-background-2 10s forwards;
+	animation-name: logo-background-2;
+	animation-duration: var(--animation-speed);
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-out;
+	animation-direction: forwards;
 }
 
-/* background */
-div::before {
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%); 
-	width: 0;
-	height: 0;
-	border: 9.875em solid transparent;
-	animation: logo-background-before-2 5s forwards;
-}
-  
-h1 {
-	position: absolute;
-	top: 41%;
-	left: 50%;
 
-	font-size: 10em;
-	font-family: adobecleanbold, Arial, Helvetica, sans-serif;
-
-	transform: translate(-50%, -50%); 
-	opacity: 0;
-	animation: be-anim 10s forwards;
-}
-
-@keyframes be-anim {
-	0% {
-	  opacity: 0;
-	}
-	33% {
-		opacity: 1;
-		color: var(--color-text-2);
-	}
-	66%, 100% {
-	  opacity: 1;
-		color: var(--color-text-3-8);
-	}
-}
-  
 @keyframes logo-background-2 {
-	0% {
+	0%, 100% {
 	  width: 0;
 	  height: 0;
 	  border: 9.375em solid transparent;
@@ -169,37 +137,124 @@ h1 {
 	33% {
 	  width: 18.75em;
 	  height: 18.75em;
-	  border: 9.375em solid var(--color-div-bg-2);
+	  border: 9.375em solid var(--bg-div-2);
 	  border-radius: 0%;
 	}
 	66% {
 		width: 18.75em;
 		height: 18.75em;
-		border: 9.375em solid var(--color-div-bg-3);
+		border: 9.375em solid var(--bg-div-3);
 		border-radius: 15%;
 	}
-	100% {
+	95% {
 		width: 18.75em;
 		height: 18.75em;
-		border: 9.375em solid var(--color-div-bg-6);
+		border: 9.375em solid var(--bg-div-6);
 		border-radius: 0%;
 	}
 }
 
-@keyframes logo-background-before-2 {
-	0% {
+
+
+
+
+/* ********** */
+/* The border */
+/* ********** */
+div::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
+
+	animation-name: logo-border;
+	animation-duration: var(--animation-speed);
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-out;
+	animation-direction: forwards;
+}
+  
+
+
+@keyframes logo-border {
+	0%, 100% {
 	  width: 18.75em;
 	  height: 18.75em;
 	  border: 0em solid transparent;
 	}
-	60% {
+	25% {
 	  width: 18.75em;
 	  height: 18.75em;
-	  border: 1.5em solid var(--bg-div-border-2);
+	  border: 1.5em solid var(--bg-div-border);
 	}
-	100% {
+	50%, 95% {
 		width: 18.75em;
 		height: 18.75em;
 		border: 0em solid transparent;
 	}
+}
+
+
+
+
+
+/* ************ */
+/* Behance Text */
+/* ************ */
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+	opacity: 0;
+
+	animation-name: be-anim;
+	animation-duration: var(--animation-speed);
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-out;
+	animation-direction: forwards;
+}
+
+@keyframes be-anim {
+  0%, 100%{
+		font-size: 12em;
+    font-weight: 400;
+		opacity: 0;
+		color: var(--color-text-2);
+		font-family: var(--font-Be-first);
+  }
+  33% {
+		font-size: 12em;
+    font-weight: 600;
+		opacity: 1;
+		color: var(--color-text-2);
+		font-family: var(--font-Be-first);
+  }
+	66% {
+		font-size: 12em;
+		font-weight: 600;
+		color: var(--color-text-3-8);
+		opacity: 1;
+	}
+	80% {
+		font-size: 12em;
+		font-weight: 600;
+		font-family: var(--font-Be-first);
+		opacity: 0;
+	}
+	90% {
+		font-size: 14em;
+		font-weight: 100;
+		opacity: 0;
+		color: var(--color-text-3-8);
+		font-family: var(--font-Be-second);
+	}
+	95% {
+		font-size: 14em;
+		font-weight: 300;
+	  opacity: 1;
+		color: var(--color-text-3-8);
+		font-family: var(--font-Be-second);
+  }
 }
