@@ -3,8 +3,6 @@
 /*********/
 /* FONTS */
 /*********/
-
-
 @font-face {
 	font-family: 'eenfont';
 	src: url('../fonts/eenfont.woff2') format('woff2'),
@@ -13,13 +11,27 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'adobecleanbold';
+	src: url('../fonts/adobecleanbold-webfont.woff2') format('woff2'),
+	     url('../fonts/adobecleanbold-webfont.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'archivo-semibold';
+	src: url('../fonts/archivo-semibold-webfont.woff2') format('woff2'),
+	     url('../fonts/archivo-semibold-webfont.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+}
+
 /* @font-face {
 	font-family: ;
-	src: url('../fonts/') format (''),
+	src: url('../fonts/') format(''),
 	     url('../fonts/') format('');
 } */
-
-
 
 
 
@@ -42,14 +54,42 @@ button:not[disabled], summary {
 /* CUSTOM PROPERTIES */
 /*********************/
 :root {
-	/* startje */
-	--color-text:#111;
-	--color-background:#eee;
-	--color-div-bg-boven:#5ba7fc;
-
 	/* fonts */
+	--font-Be-first: "Helvetica Bold", "Helvetica", "Arial", sans-serif;
 
-	--font-Be-modern: "Helvetica Bold", "Helvetica", "Arial", sans-serif;
+	/* Logo kleuren */
+	--color-bg-body: #eee;
+
+	/* Behance Huistyle kleuren */
+	--color-huisstyle-black: #000000;
+	--color-huisstyle-white: #ffffff;
+	--color-huisstyle-lightBlue: #5ea4ff;
+	--color-huisstyle-verydarkBlue: #001534;
+	--color-huisstyle-Blue: #0078ff;
+
+	/* Behance first version of the logo */
+
+	--color-text-1: var(--color-huisstyle-black);
+
+	/* Behance second version of the logo */
+	--color-div-bg-2: var(--color-huisstyle-verydarkBlue);
+	--bg-div-border-2: var(--color-huisstyle-lightBlue);
+	--color-text-2: var(--color-huisstyle-lightBlue);
+
+	/* Behance third version of the logo */
+	--color-div-bg-3: var(--color-huisstyle-black);
+	--color-text-3-8: var(--color-huisstyle-white);
+
+	/* Behance fourth version of the logo */
+
+	/* Behance fifth version of the logo */
+
+	/* Behance sixth version of the logo */
+	--color-div-bg-6: var(--color-huisstyle-lightBlue);
+
+	/* Behance seventh version of the logo */
+
+	/* Behance eigth version of the logo */
 }
 
 
@@ -61,84 +101,105 @@ button:not[disabled], summary {
 /****************/
 
 body {
-	font-family: eenfont, sans-serif;
-	color: var(--color-text);
-	background-color: var(--color-background);
+	background-color: var(--color-bg-body);
 
 	height: 100dvh;
 	display: grid;
 	place-content: center;
 }
-  
+
+/* border */
 div {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%); 
 	width: 0;
 	height: 0;
-	border: 9.375em solid transparent;
-	animation: logo-background 2s forwards;
+	animation: logo-background-2 10s forwards;
 }
-  
+
+/* background */
 div::before {
 	content: "";
 	position: absolute;
-	top: -9.875em;
-	left: -9.875em;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
 	width: 0;
 	height: 0;
 	border: 9.875em solid transparent;
-	border-bottom-color: var(--color-div-bg-boven);
-	animation: logo-background-before 1s forwards;
+	animation: logo-background-before-2 5s forwards;
 }
   
 h1 {
 	position: absolute;
-	top: 40%;
+	top: 41%;
 	left: 50%;
 
 	font-size: 10em;
-	font-family: var(--font-Be-modern);
+	font-family: adobecleanbold, Arial, Helvetica, sans-serif;
 
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%); 
 	opacity: 0;
-	animation: be-anim 1s 1.5s forwards;
+	animation: be-anim 10s forwards;
 }
-  
-@keyframes logo-background {
-	0% {
-	  width: 0;
-	  height: 0;
-	  border: 9.375em solid transparent;
-	}
-	100% {
-	  width: 18.75em;
-	  height: 18.75em;
-	  border: 9.375em solid var(--color-div-bg-boven);
-	}
-}
-  
-@keyframes logo-background-before {
-	0% {
-	  width: 0;
-	  height: 0;
-	  border: 9.375em solid transparent;
-	}
-	100% {
-	  width: 19.75em;
-	  height: 19.75em;
-	  border: 9.875em solid transparent;
-	}
-}
-  
+
 @keyframes be-anim {
 	0% {
 	  opacity: 0;
 	}
-	100% {
+	33% {
+		opacity: 1;
+		color: var(--color-text-2);
+	}
+	66%, 100% {
 	  opacity: 1;
+		color: var(--color-text-3-8);
+	}
+}
+  
+@keyframes logo-background-2 {
+	0% {
+	  width: 0;
+	  height: 0;
+	  border: 9.375em solid transparent;
+	  border-radius: 0%;
+	}
+	33% {
+	  width: 18.75em;
+	  height: 18.75em;
+	  border: 9.375em solid var(--color-div-bg-2);
+	  border-radius: 0%;
+	}
+	66% {
+		width: 18.75em;
+		height: 18.75em;
+		border: 9.375em solid var(--color-div-bg-3);
+		border-radius: 15%;
+	}
+	100% {
+		width: 18.75em;
+		height: 18.75em;
+		border: 9.375em solid var(--color-div-bg-6);
+		border-radius: 0%;
 	}
 }
 
-/* jouw code */
+@keyframes logo-background-before-2 {
+	0% {
+	  width: 18.75em;
+	  height: 18.75em;
+	  border: 0em solid transparent;
+	}
+	60% {
+	  width: 18.75em;
+	  height: 18.75em;
+	  border: 1.5em solid var(--bg-div-border-2);
+	}
+	100% {
+		width: 18.75em;
+		height: 18.75em;
+		border: 0em solid transparent;
+	}
+}

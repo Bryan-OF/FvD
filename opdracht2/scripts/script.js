@@ -1,3 +1,5 @@
+// script.js
+
 // JavaScript Document
 console.log("howdy");
 
@@ -15,10 +17,6 @@ const list = document.querySelector('ul');
 // de button
 const button = document.querySelector('button');
 
-
-
-
-
 /****************/
 /* VUL DE LIJST */
 /****************/
@@ -26,17 +24,23 @@ function getJoke() {
   getData(URL).then(data => {
     const theJoke = data.joke;
     const theJokeHTML = `
-						<li>
-							<p>${theJoke}</p>
-						</li>
-					`;
-    list.insertAdjacentHTML('beforeend', theJokeHTML);
+      <li>
+        <p>${theJoke}</p>
+        <button class="like-button">Like</button>
+      </li>
+    `;
+    list.insertAdjacentHTML('afterbegin', theJokeHTML);
+
+    // Select the like button inside the newly added li element
+    const likeButton = document.querySelector('li button.like-button');
+    likeButton.addEventListener('click', () => {
+      // Move the li element to the dropArea
+      const dropArea = document.querySelector('section:nth-of-type(3) > ul');
+      const listItem = likeButton.closest('li');
+      dropArea.prepend(listItem);
+    });
   });
 }
-
-
-
-
 
 /****************/
 /* FETCH DATA   */
@@ -53,10 +57,6 @@ async function getData(URL) {
       )
   );
 }
-
-
-
-
 
 /*********/
 /* START */
@@ -83,3 +83,5 @@ Sortable.create(dropArea, {
   group: "shared",
   animation: 150,
 });
+
+
