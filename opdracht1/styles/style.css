@@ -59,11 +59,11 @@ button:not[disabled], summary {
 	--font-Be-second: "adobecleanbold", "Arial", "Helvetica", "sans-serif";
 
 	/* Logo kleuren */
-	--color-bg-body: #eee;
+	--color-bg-body: var(--color-huisstyle-white);
 
 	/* Behance Huistyle kleuren */
 	--color-huisstyle-black: #000000;
-	--color-huisstyle-white: #ffffff;
+	--color-huisstyle-white: #eee;
 	--color-huisstyle-lightBlue: #5ea4ff;
 	--color-huisstyle-verydarkBlue: #001534;
 	--color-huisstyle-Blue: #0078ff;
@@ -93,7 +93,7 @@ button:not[disabled], summary {
 	/* Behance eigth version of the logo */
 
 	/* Animation speed */
-	--animation-speed: 5s;
+	--animation-speed: 10s;
 }
 
 
@@ -257,4 +257,72 @@ h1 {
 		color: var(--color-text-3-8);
 		font-family: var(--font-Be-second);
   }
+}
+
+
+
+
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		/* Logo kleuren */
+		--color-bg-body: var(--color-huisstyle-black);
+	
+		/* Behance Huistyle kleuren */
+		--color-huisstyle-black: #000000;
+		--color-huisstyle-white: #eee;
+		--color-huisstyle-lightBlue: #5ea4ff;
+		--color-huisstyle-verydarkBlue: #001534;
+		--color-huisstyle-Blue: #0078ff;
+	
+		/* Behance first version of the logo */
+	
+		--color-text-1: var(--color-huisstyle-black);
+	
+		/* Behance second version of the logo */
+		--bg-div-2: var(--color-huisstyle-white);
+		--bg-div-border: var(--color-huisstyle-lightBlue);
+		--color-text-2: var(--color-huisstyle-lightBlue);
+	
+		/* Behance third version of the logo */
+		--bg-div-3: var(--color-huisstyle-Blue);
+		--color-text-3-8: var(--color-huisstyle-white);
+	
+		/* Behance sixth version of the logo */
+		--bg-div-6: var(--color-huisstyle-lightBlue);
+	
+		/* Animation speed */
+		--animation-speed: 10s;
+	}
+
+	body {
+		background-color: var(--color-bg-body);
+	}
+
+	@keyframes logo-background-2 {
+		0%, 100% {
+			width: 0;
+			height: 0;
+			border: 9.375em solid transparent;
+			border-radius: 0%;
+		}
+		33% {
+			width: 18.75em;
+			height: 18.75em;
+			border: 9.375em solid var(--bg-div-2);
+			border-radius: 0%;
+		}
+		66% {
+			width: 18.75em;
+			height: 18.75em;
+			border: 9.375em solid var(--bg-div-3);
+			border-radius: 15%;
+		}
+		95% {
+			width: 18.75em;
+			height: 18.75em;
+			border: 9.375em solid var(--bg-div-6);
+			border-radius: 0%;
+		}
+	}
 }

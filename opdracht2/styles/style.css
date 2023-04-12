@@ -1,12 +1,14 @@
 /*********/
 /* FONTS */
 /*********/
+
+/* Futurama font https://www.dafont.com/futurama.font */
 @font-face {
-	font-family: 'eenfont';
-	src: url('../fonts/eenfont.woff2') format('woff2'),
-			 url('../fonts/eenfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'futurama_bold_fontregular';
+  src: url('../fonts/fr-bold-webfont.woff2') format('woff2'),
+       url('../fonts/fr-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 
@@ -37,31 +39,65 @@ html, body {
 
 
 
+
+
 /*********************/
 /* CUSTOM PROPERTIES */
 /*********************/
 :root {
-	/* header */
-	--color-text-header:black;
-	--color-background-header: grey;
+  /* Futurama huistyle kleuren */
+  --fr-red:#c71000;
+  --fr-orange:#ff6f00;
+  --fr-lightOrange:#ff6348;
+  --fr-lightBrown:#e19176;
+  --fr-pink:#ff95a8;
+  --fr-purple:#8a4198;
 
-  /*  */
+  --fr-darkGreen:#1a5354;
+  --fr-lightGreen:#ade2d0;
+  --fr-turchese:#008ea0;
+  --fr-lightTurchese:#5a9599;
+  --fr-lightBlue:#84d7e1;
+
+  --fr-veryDarkGrey:#3d3b25;
+  --fr-darkGrey:#3f4041;
+
+
+  /* Algemene styling */
 	--color-text:#111;
 	--color-background:#eee;
 
+
+
+  --bg-main: var(--color-background);
+
+	/* header */
+	--color-text-header:var(--color-text);
+	--bg-header: var(--color-background);
+
+
 	/* De Lijst */
-	--color-card-background:white;
+  --bg-lijst-h2:var(--fr-lightOrange);
+  --bg-section-1: var(--fr-lightBrown);
+  --bg-li: var(--color-background);
+  --bg-like-button: var(--fr-pink);
+  --bg-section-1-div: var(--fr-darkGrey);
 
   /* Bender's Hoofd */
-  --bg-section-1: purple;
+  --bg-section-2: var(--fr-purple);
 
-	--color-button-background:white;
-	--color-button-active:crimson;
-	--color-button-text:black;
+
+  /* Button */
+	--color-button-background:var(--fr-orange);
+	--color-button-active:var(--fr-red);
+	--color-button-text:var(--color-button-text);
 
 	/* Saved Jokes */
-	--color-background-section-3: #2d2d2d;
+  --bg-savedJokes-h2:var(--fr-lightTurchese);
+	--bg-section-3: var(--fr-lightGreen);
 }
+
+
 
 
 
@@ -69,10 +105,12 @@ html, body {
 /* GENERAL STYLING */
 /*******************/
 body {
-	font-family: eenfont, sans-serif;
-	color: var(--color-text);
-	background-color: var(--color-background);
+  font-family: 'futurama_bold_fontregular', sans-serif;
+  letter-spacing: 0.2em;
+  color: var(--color-text);
+  background-color: var(--color-background);
 }
+
 
 h1, h2 {
 	color: var(--color-text-header);
@@ -84,19 +122,9 @@ h1, h2 {
 /*************/
 /* DE LAYOUT */
 /*************/
-
-/* body */
-header {
-  height:8vh;
-}
-
 main {
+  background-color: var(--bg-main);
   height:92vh;
-}
-
-
-/* main */
-main {
   display:grid;
   grid-template-rows: 20% 80%;
   grid-template-areas:
@@ -130,6 +158,11 @@ section:nth-of-type(2) {
   section:nth-of-type(3) {
     grid-area:liked;
   }
+
+  body {
+    letter-spacing: 0.6em;
+    text-shadow: 0.5px 0.5px, -0.5px 0.5px, 0.5px -0.5px, -0.5px -0.5px;
+  }
 }
 
 
@@ -140,7 +173,8 @@ section:nth-of-type(2) {
 /* HEADER */
 /**********/
 header {
-	background-color: var(--color-background-header);
+  height:8vh;
+	background-color: var(--bg-header);
   display: grid;
   place-content: center;
 }
@@ -169,7 +203,7 @@ section:nth-of-type(1) {
 
 /* liked list */
 section:nth-of-type(3) {
-  background-color: var(--color-background-section-3);
+  background-color: var(--bg-section-3);
 }
 
 section.active {
@@ -187,17 +221,17 @@ h2 {
   
   display: grid;
   place-content: center;
-
-  background-color: var(--color-background);
 	font-size: 1.5em;
 }
 
 section:nth-of-type(1) h2 {
   left:0;
+  background-color: var(--bg-lijst-h2);
 }
 
 section:nth-of-type(3) h2 {
   right:0;
+  background-color: var(--bg-savedJokes-h2);
 }
 
 section:not(.active) h2 {
@@ -219,6 +253,11 @@ h2 button {
 }
 
 @media (min-width:40em) and (min-height: 40em) {
+  header {
+    text-shadow: 0.5px 0.5px, -0.5px 0.5px, 0.5px -0.5px, -0.5px -0.5px;
+    font-size: 1.8em;
+  }
+
   .list {
     margin-top:0;
   }
@@ -283,7 +322,7 @@ section li {
 
   text-align: left;
 
-  background-color: var(--color-card-background);
+  background-color: var(--bg-li);
   border-radius: 1em;
 	opacity: 0;
 
@@ -311,7 +350,7 @@ section:nth-of-type(1) p {
 /*******************/
 section:nth-of-type(1) div {
   padding: 1em;
-  background-color: grey;
+  background-color: var(--bg-section-1-div);
 }
 
 
@@ -321,21 +360,29 @@ section:nth-of-type(1) div {
 /**********/
 section div button,
 section li button {
-  width:100%;
+  width: 100%;
   padding: 1em;
-
 	font: inherit;
-  font-weight: 700;
+  letter-spacing: 0.4em;
   color: var(--color-button-text);
 
   appearance: none;
-  background-color: var(--color-button-background);
   border: .5em solid transparent;
   border-radius: 1em;
 
   display:grid;
-  grid-template-columns: min-content;
   justify-content: center;
+}
+
+
+
+section div button {
+  background-color: var(--color-button-background);
+
+}
+
+section li button {
+  background-color: var(--bg-like-button);
 }
 
 /* altijd belangrijk */
@@ -355,12 +402,7 @@ section:nth-of-type(1) div button:hover {
 /* BENDER */
 /* ****** */
 section:nth-of-type(2) {
-	background: linear-gradient(
-    180deg,
-    rgba(243, 222, 8, 1) 0%,
-    rgba(135, 124, 5, 1) 60%,
-    rgba(0, 0, 0, 1) 100%
-  );
+	background-color: var(--bg-section-2);
 
 	display: flex;
 	justify-content: center;
@@ -368,7 +410,7 @@ section:nth-of-type(2) {
 }
 
 
-/* head */
+/* Bender Hoofd */
 section:nth-of-type(2) img {
   height: 75%;
   width:auto;
@@ -386,6 +428,134 @@ section:nth-of-type(2) img {
   }
 }
 
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Futurama huistyle kleuren */
+    --fr-red:#c71000;
+    --fr-orange:#ff6f00;
+    --fr-lightOrange:#ff6348;
+    --fr-lightBrown:#e19176;
+    --fr-pink:#ff95a8;
+    --fr-purple:#8a4198;
+  
+    --fr-darkGreen:#1a5354;
+    --fr-lightGreen:#ade2d0;
+    --fr-turchese:#008ea0;
+    --fr-lightTurchese:#5a9599;
+    --fr-lightBlue:#84d7e1;
+  
+    --fr-veryDarkGrey:#3d3b25;
+    --fr-darkGrey:#3f4041;
+  
+  
+    /* Algemene styling */
+    --color-text:#111;
+    --color-background:#eee;
+    
+  
+  
+    --bg-main: var(--color-text);
+  
+    /* header */
+    --color-text-header:var(--color-background);
+    --bg-header: var(--color-text);
+  
+  
+    /* De Lijst */
+    --bg-lijst-h2:var(--fr-veryDarkGrey);
+    --bg-section-1: var(--fr-lightOrange);
+    --bg-li: var(--fr-veryDarkGrey);
+    --bg-like-button: var(--fr-purple);
+    --bg-section-1-div: var(--fr-veryDarkGrey);
+
+    --color-dark-p:var(--color-background);
+  
+    /* Bender's Hoofd */
+    --bg-section-2: var(--fr-purple);
+  
+  
+    /* Button */
+    --color-button-background:var(--fr-red);
+    --color-button-active:var(--fr-purple);
+    --color-button-text:var(--color-background);
+  
+    /* Saved Jokes */
+    --bg-savedJokes-h2:var(--fr-veryDarkGrey);
+    --bg-section-3: var(--fr-darkGreen);
+  }
+
+  body {
+    color: var(--color-text);
+    background-color: var(--color-background);
+  }
+  
+  main {
+    background-color: var(--bg-main);
+  }
+  
+  h1, h2 {
+    color: var(--color-text-header);
+  }
+
+  header {
+    background-color: var(--bg-header);
+  }
+  
+  /* jokes list */
+  section:nth-of-type(1) {
+    background-color: var(--bg-section-1);
+  }
+
+  section:nth-of-type(1) p, section:nth-of-type(3) p {
+    color: var(--color-dark-p);
+  }
+  
+  /* liked list */
+  section:nth-of-type(3) {
+    background-color: var(--bg-section-3);
+  }
+  
+  section:nth-of-type(1) h2 {
+    background-color: var(--bg-lijst-h2);
+  }
+  
+  section:nth-of-type(3) h2 {
+    background-color: var(--bg-savedJokes-h2);
+  }
+  
+  section li {
+    background-color: var(--bg-li);
+  }
+  
+  section:nth-of-type(1) div {
+    background-color: var(--bg-section-1-div);
+  }
+  
+  section div button,
+  section li button {
+    color: var(--color-button-text);
+  }
+  
+  section div button {
+    background-color: var(--color-button-background);
+  }
+  
+  section li button {
+    background-color: var(--bg-like-button);
+  }
+
+  section:nth-of-type(1) div button:active {
+    background-color: var(--color-button-active);
+  }
+
+  section:nth-of-type(2) {
+    background-color: var(--bg-section-2);
+  }
+}
+
+
+/* Oude Mond animatie */
 /* section:nth-of-type(2) div:nth-of-type(1) {
   z-index: 50;
   position: absolute;
